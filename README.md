@@ -10,14 +10,32 @@ I design websites for local businesses and build free web tools that actually so
 Clean, fast, conversion-focused websites for med spas, wedding vendors, and owner-operated businesses — especially in Colorado. No templates. No bloat.
 
 **Free web apps**
-I build and publish free tools for real use cases. If something doesn't exist and should, I build it.
+I build and publish free tools for real use cases. If something doesn't exist and should, I build it. More coming soon.
+
+---
+
+## Free tools I've built
+
+### How Old Am I — Age Calculator
+3 tools in one:
+- **Age calculator** — enter your date of birth, get your exact age in years, months, days, hours, and minutes
+- **How old I was** — pick a year and find out how old you were (e.g. 2020 when COVID happened)
+- **Age difference** — enter two birthdays, get the exact gap between two people
+
+→ [Try it free](https://howoldiam.netlify.app)
+
+---
+
+### Character Counter *(coming soon)*
+A free tool for counting characters, words, sentences, and paragraphs in real time — useful for social media captions, bios, and anywhere character limits matter.
+
+→ In development
 
 ---
 
 ## Currently building
 
 - Client websites through [Moeed Creates](https://moeedcreates.netlify.app)
-- AI-powered web tools (exploring agentic workflows)
 - Open source utilities for small business owners
 
 ---
@@ -32,7 +50,7 @@ If you run a local business and don't have a website (or hate the one you have),
 
 ## Tech I work with
 
-`HTML` `CSS` `JavaScript` `Figma` `SEO` `AI tools`
+`HTML` `CSS` `JavaScript` `Figma` `SEO`
 
 ---
 
