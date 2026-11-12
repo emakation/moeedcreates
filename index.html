@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moeed – Web Design & Digital Marketing</title>
+  <meta name="description" content="Moeed – Web Designer & Digital Marketer helping local businesses grow online with landing pages, social media management and video editing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0A0A0A;
+      --dark: #111111;
+      --card: #161616;
+      --border: rgba(255,255,255,0.08);
+      --white: #FFFFFF;
+      --grey: #888888;
+      --grey-light: #BBBBBB;
+      --accent: #6C63FF;
+      --accent-2: #FF6584;
+      --accent-3: #43E97B;
+      --cream: #F5F5F0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 700; color: var(--white);
+      text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--grey-light); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--accent) !important; color: var(--white) !important;
+      padding: 0.5rem 1.3rem; border-radius: 50px;
+      transition: opacity 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85 !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 2.5rem 5rem; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(108,99,255,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 10% 80%, rgba(67,233,123,0.06) 0%, transparent 60%),
+                  var(--black);
+    }
+    /* Grid lines */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3);
+      padding: 0.4rem 1rem; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent);
+      margin-bottom: 1.75rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .tag-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero h1 .italic { font-family: 'Fraunces', serif; font-weight: 400; font-style: italic; color: var(--accent); }
+    .hero h1 .line2 { display: block; color: var(--grey-light); }
+
+    .hero-sub {
+      font-size: 1.1rem; color: var(--grey); font-weight: 400;
+      line-height: 1.7; margin-bottom: 2.5rem; max-width: 520px;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s ease 0.3s both; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: 50px;
+      text-decoration: none; font-weight: 600; font-size: 0.95rem;
+      box-shadow: 0 0 30px rgba(108,99,255,0.3);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(108,99,255,0.4); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--white);
+      padding: 0.9rem 2rem; border-radius: 50px;
+      border: 1px solid var(--border); text-decoration: none;
+      font-weight: 600; font-size: 0.95rem;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem; flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+    .stat-item { }
+    .stat-num {
+      font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em;
+      color: var(--white); line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.78rem; color: var(--grey); margin-top: 0.3rem; }
+
+    /* ── SHARED ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .section-title .italic { font-family: 'Fraunces', serif; font-weight: 400; font-style: italic; }
+    .section-sub { color: var(--grey); font-size: 1rem; line-height: 1.7; max-width: 500px; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .services-header { margin-bottom: 3rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; opacity: 0; transition: opacity 0.3s;
+    }
+    .service-card.s1::before { background: var(--accent); }
+    .service-card.s2::before { background: var(--accent-2); }
+    .service-card.s3::before { background: var(--accent-3); }
+    .service-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.15); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.25rem;
+    }
+    .s1 .service-icon { background: rgba(108,99,255,0.12); }
+    .s2 .service-icon { background: rgba(255,101,132,0.12); }
+    .s3 .service-icon { background: rgba(67,233,123,0.12); }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.85rem; color: var(--grey); line-height: 1.65; margin-bottom: 1.25rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .stag {
+      font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.6rem;
+      border-radius: 50px; border: 1px solid var(--border); color: var(--grey-light);
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio { background: var(--black); }
+    .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.5rem; }
+
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+    .project-preview {
+      height: 200px; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .preview-1 { background: linear-gradient(135deg, #2C1810, #6B3A2A); }
+    .preview-2 { background: linear-gradient(135deg, #2D4A2D, #4A6741); }
+    .preview-3 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+    .preview-add { background: linear-gradient(135deg, #161616, #1f1f1f); border: 2px dashed rgba(255,255,255,0.1); }
+
+    .preview-emoji { font-size: 3.5rem; opacity: 0.4; }
+    .preview-label {
+      position: absolute; bottom: 1rem; left: 1rem;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+      padding: 0.3rem 0.75rem; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .preview-live {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(67,233,123,0.15); border: 1px solid rgba(67,233,123,0.3);
+      padding: 0.25rem 0.6rem; border-radius: 50px;
+      font-size: 0.68rem; font-weight: 700; color: var(--accent-3);
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .live-dot { width: 5px; height: 5px; background: var(--accent-3); border-radius: 50%; animation: pulse 2s infinite; }
+
+    .project-info { padding: 1.5rem; }
+    .project-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .project-info p { font-size: 0.82rem; color: var(--grey); line-height: 1.55; margin-bottom: 1rem; }
+    .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .ptag {
+      font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem;
+      border-radius: 50px; border: 1px solid var(--border); color: var(--grey-light);
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--accent); font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.6rem; }
+
+    /* Add more card */
+    .add-card {
+      background: var(--card); border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 20px; overflow: hidden; min-height: 320px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.75rem; color: var(--grey); transition: border-color 0.3s, background 0.3s;
+    }
+    .add-card:hover { border-color: rgba(108,99,255,0.3); background: rgba(108,99,255,0.03); }
+    .add-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .add-card p { font-size: 0.85rem; font-weight: 500; }
+    .add-card span { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+    /* ── PROCESS ── */
+    .process { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 0; margin-top: 3rem; }
+    .process-step {
+      padding: 2rem; border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .step-num {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .step-icon { font-size: 1.75rem; margin-bottom: 0.75rem; display: block; }
+    .process-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .process-step p { font-size: 0.8rem; color: var(--grey); line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--black); text-align: center; }
+    .cta-inner {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 28px; padding: 5rem 3rem; position: relative; overflow: hidden;
+      max-width: 800px; margin: 0 auto;
+    }
+    .cta-inner::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(108,99,255,0.15) 0%, transparent 70%);
+    }
+    .cta-inner h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+      letter-spacing: -0.03em; margin-bottom: 1rem; position: relative;
+    }
+    .cta-inner p { color: var(--grey); font-size: 1rem; margin-bottom: 2rem; position: relative; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    .cta-contact {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--white); font-size: 0.9rem;
+      font-weight: 600; padding: 0.85rem 1.75rem; border-radius: 50px;
+      border: 1px solid var(--border); text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cta-contact:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem; display: flex;
+      justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 100%;
+    }
+    .footer-left { font-size: 0.82rem; color: var(--grey); }
+    .footer-left strong { color: var(--white); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0;
+      background: var(--dark); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 1.6rem; font-weight: 700; text-decoration: none; color: var(--white); }
+    .mobile-nav-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4rem 1.25rem; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-step { border-bottom: 1px solid var(--border); }
+      .process-step:nth-child(even) { border-right: none; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .process-step { border-right: none; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#portfolio" onclick="closeMobileNav()">Work</a>
+  <a href="#process" onclick="closeMobileNav()">Process</a>
+  <a href="https://instagram.com/smmmoeed" target="_blank" onclick="closeMobileNav()">Instagram</a>
+  <a href="https://instagram.com/smmmoeed" target="_blank" class="btn-primary" style="font-size:0.9rem;margin-top:0.5rem;">Let's Work Together</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">moeed<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="https://instagram.com/smmmoeed" target="_blank" class="nav-cta">Let's Talk</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMobileNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+  <img src="profile.jpeg"
+  style="width:64px;height:64px;border-radius:50%;border:2px solid rgba(108,99,255,0.5);margin-bottom:1.25rem;object-fit:cover;"
+  alt="Moeed">
+    <div class="hero-tag">
+      <span class="tag-dot"></span>
+      Available for new projects
+    </div>
+    <h1>
+      Web Design &<br>
+      <span class="italic">Digital Marketing</span>
+      <span class="line2">that actually works.</span>
+    </h1>
+    <p class="hero-sub">I help local businesses get found online — through stunning landing pages, social media management and scroll-stopping video content.</p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-primary">View My Work →</a>
+      <a href="https://www.instagram.com/moeedcreates/" target="_blank" class="btn-outline">📱 DM on Instagram</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-label">Websites Built</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">30<span>+</span></div>
+        <div class="stat-label">Businesses Reached</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Custom Designs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="section-label">What I Do</span>
+      <h2 class="section-title">Services that <span class="italic">move the needle</span></h2>
+      <p class="section-sub">Everything a local business needs to grow online — under one roof.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card s1 reveal">
+        <div class="service-icon">🌐</div>
+        <h3>Web Design & Landing Pages</h3>
+        <p>Clean, modern one-page websites built to convert visitors into customers. Mobile-friendly, SEO-optimized and delivered fast.</p>
+        <div class="service-tags">
+          <span class="stag">HTML/CSS</span>
+          <span class="stag">SEO</span>
+          <span class="stag">Mobile-First</span>
+          <span class="stag">Netlify</span>
+        </div>
+      </div>
+      <div class="service-card s2 reveal reveal-delay-1">
+        <div class="service-icon">📱</div>
+        <h3>Social Media Management</h3>
+        <p>Strategic content creation and account management that grows your following, builds trust and drives real engagement.</p>
+        <div class="service-tags">
+          <span class="stag">Instagram</span>
+          <span class="stag">Facebook</span>
+          <span class="stag">Content Strategy</span>
+          <span class="stag">Growth</span>
+        </div>
+      </div>
+      <div class="service-card s3 reveal reveal-delay-2">
+        <div class="service-icon">🎬</div>
+        <h3>Video Editing</h3>
+        <p>Engaging short-form video content for Reels, TikTok and YouTube Shorts — edited to stop the scroll and grow your brand.</p>
+        <div class="service-tags">
+          <span class="stag">Reels</span>
+          <span class="stag">TikTok</span>
+          <span class="stag">Short-Form</span>
+          <span class="stag">Brand Video</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="portfolio-header">
+      <div>
+        <span class="section-label">My Work</span>
+        <h2 class="section-title reveal">Recent <span class="italic">Projects</span></h2>
+      </div>
+    </div>
+    <div class="portfolio-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card reveal">
+        <div class="project-preview preview-1">
+          <span class="preview-emoji">☕</span>
+          <span class="preview-label">Web Design</span>
+          <span class="preview-live"><span class="live-dot"></span> Live</span>
+        </div>
+        <div class="project-info">
+          <h3>Frandly Coffee</h3>
+          <p>A warm, modern landing page for a Colorado Springs coffee shop. Features SEO, Google Maps integration and mobile-first design.</p>
+          <div class="project-tags">
+            <span class="ptag">Landing Page</span>
+            <span class="ptag">SEO</span>
+            <span class="ptag">Local Business</span>
+          </div>
+          <a href="https://fankly-coffee.netlify.app/" class="project-link">View Live Site →</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-preview preview-2">
+          <span class="preview-emoji">🌼</span>
+          <span class="preview-label">Web Design</span>
+          <span class="preview-live"><span class="live-dot"></span> Live</span>
+        </div>
+        <div class="project-info">
+          <h3>Dandy Lion Coffee Co.</h3>
+          <p>A whimsical botanical landing page for Denver's AAPI & woman-owned craft coffee and boutique plant shop in Park Hill.</p>
+          <div class="project-tags">
+            <span class="ptag">Landing Page</span>
+            <span class="ptag">Botanical Design</span>
+            <span class="ptag">Denver</span>
+          </div>
+          <a href="https://dandy-lion-denvers.netlify.app/" class="project-link">View Live Site →</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-preview preview-3">
+          <span class="preview-emoji">🚀</span>
+          <span class="preview-label">Web Design</span>
+          <span class="preview-live"><span class="live-dot"></span> Live</span>
+        </div>
+        <div class="project-info">
+          <h3>Cafe Jackson Five</h3>
+          <p>Where Good Food Meets Great Vibes — Cafe Jackson Five.</p>
+          <div class="project-tags">
+            <span class="ptag">Landing Page</span>
+            <span class="ptag">Local Business</span>
+          </div>
+          <a href="https://cafe-jackson-five.netlify.app/" class="project-link">View Live Site →</a>
+        </div>
+      </div>
+
+      <!-- Add More -->
+      <div class="add-card reveal reveal-delay-3">
+        <div class="add-icon">＋</div>
+        <p>More projects coming soon</p>
+        <span>Updated as new clients are onboarded</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-title">Simple. Fast. <span class="italic">Effective.</span></h2>
+      <p class="section-sub">From first conversation to live website — here's exactly what working with me looks like.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <span class="step-icon">💬</span>
+        <h3>We Talk</h3>
+        <p>You tell me about your business, your goals and what you need. I listen and ask the right questions.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <span class="step-icon">🎨</span>
+        <h3>I Build a Demo</h3>
+        <p>I design and build a free demo tailored to your brand — no payment, no commitment needed.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <span class="step-icon">✏️</span>
+        <h3>We Refine</h3>
+        <p>You review the demo and share feedback. I make adjustments until it's exactly right.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <span class="step-icon">🚀</span>
+        <h3>We Go Live</h3>
+        <p>Your website goes live on your domain — fast, clean and ready to bring in new customers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Ready to grow <span class="italic" style="font-family:'Fraunces',serif;font-style:italic;">your business</span> online?</h2>
+      <p>Whether you need a website, social media help or video content — let's make it happen.</p>
+      <div class="cta-btns">
+        <a href="https://instagram.com/smmmoeed" target="_blank" class="btn-primary">📱 DM me on Instagram</a>
+        <a href="mailto:ssmmoeed@email.com" class="cta-contact">✉️ Send an Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2025 <strong>Moeed</strong> · Web Design & Digital Marketing</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/smmmoeed" target="_blank">Instagram</a>
+    <a href="#portfolio">Work</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+
+  function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); document.body.style.overflow = ''; }
+</script>
+</body>
+</html>
